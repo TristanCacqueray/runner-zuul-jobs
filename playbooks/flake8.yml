@@ -3,7 +3,7 @@
   tasks:
     - name: Ensure tox is installed
       shell: type flake8 || pip install --user flake8
-    - name: Run tox
+    - name: Run linters
       args:
         chdir: "{{ zuul.project.src_dir }}"
       command: "flake8"
