@@ -1,0 +1,19 @@
+- hosts: controller
+  vars:
+    awx_src: "{{ ansible_env.HOME }}/src/github.com/ansible/awx"
+  pre_tasks::
+    - import_role: name=awx-build-image
+    - import_role: name=openshift-deploy
+    - import_role: name=awx-install-openshift
+  tasks:
+    - name: Verify pods are running
+      command: oc status
+
+    - name: Get logs
+      command: oc logs awx-celery
+
+    - name: Get services
+      command: oc get services
+
+    - name: Get routes
+      command: oc get routes
